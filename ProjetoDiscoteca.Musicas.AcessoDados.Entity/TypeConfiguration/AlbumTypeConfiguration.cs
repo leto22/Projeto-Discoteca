@@ -25,6 +25,10 @@ namespace ProjetoDiscoteca.Musicas.AcessoDados.Entity.TypeConfiguration
             Property(p => p.Descricao).IsOptional()
                 .HasColumnName("ALB_OBSERVACOES")
                 .HasMaxLength(1000);
+
+            Property(p => p.Email).IsRequired()
+                .HasColumnName("ALB_EMAIL")
+                .HasMaxLength(80);
         }
 
         protected override void ConfiguraChavePrimaria()
