@@ -22,7 +22,6 @@ namespace ProjetoDiscoteca.Musicas.AcessoDados.Entity.Context
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new AlbumTypeConfiguration());
-
         }
     }
 }
