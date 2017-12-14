@@ -6,8 +6,10 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using ProjetoDiscoteca.Musicas.AcessoDados.Entity.Context;
 using ProjetoDiscoteca.Musicas.Dominio;
+using ProjetoDiscoteca.Musicas.Web.ViewModels.Album;
 
 namespace ProjetoDiscoteca.Musicas.Web.Controllers
 {
@@ -18,7 +20,7 @@ namespace ProjetoDiscoteca.Musicas.Web.Controllers
         // GET: Album
         public ActionResult Index()
         {
-            return View(db.Albuns.ToList());
+            return View(Mapper.Map<List<Album>, List<AlbumIndexViewModel>>(db.Albuns.ToList()));
         }
 
         // GET: Album/Details/5
