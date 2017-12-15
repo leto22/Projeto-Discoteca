@@ -21,14 +21,14 @@ namespace ProjetoDiscoteca.Musicas.Web.ViewModels.Album
         public string Nome { get; set; }
 
         [Display(Name = "Descrições")]
-        [Required(ErrorMessage = "Nome Obrigatório!")]
+        [Required(ErrorMessage = "Descrição Obrigatória!")]
         [MaxLength(100, ErrorMessage = "Quantidade de Caracteres Excedidas (Máximo de 1000!)")]
         public string Descricao { get; set; }
 
         [Display(Name = "Email de Contato")]
         [DataType(DataType.EmailAddress)]
         [Required(ErrorMessage = "E-mail Obrigatório!")]
-        [MaxLength(80, ErrorMessage = "Quantidade de Caracteres Excedidas (Máximo de 1000!)")]
+        [MaxLength(80, ErrorMessage = "Quantidade de Caracteres Excedidas (Máximo de 80!)")]
         public string Email { get; set; }
     }
 }

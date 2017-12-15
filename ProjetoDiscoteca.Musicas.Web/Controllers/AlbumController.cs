@@ -20,7 +20,7 @@ namespace ProjetoDiscoteca.Musicas.Web.Controllers
         // GET: Album
         public ActionResult Index()
         {
-            return View(Mapper.Map<List<Album>, List<AlbumIndexViewModel>>(db.Albuns.ToList()));
+            return View(Mapper.Map<List<Album>, List<AlbumExibicaoViewModel>>(db.Albuns.ToList()));
         }
 
         // GET: Album/Details/5
@@ -35,7 +35,7 @@ namespace ProjetoDiscoteca.Musicas.Web.Controllers
             {
                 return HttpNotFound();
             }
-            return View(album);
+            return View(Mapper.Map<Album, AlbumExibicaoViewModel>(album));
         }
 
         // GET: Album/Create
@@ -49,16 +49,17 @@ namespace ProjetoDiscoteca.Musicas.Web.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AlbumID,Ano,Nome,Descricao,Email")] Album album)
+        public ActionResult Create([Bind(Include = "AlbumID,Ano,Nome,Descricao,Email")] AlbumViewModel albViewModel)
         {
             if (ModelState.IsValid)
             {
+                Album album = Mapper.Map<AlbumViewModel, Album>(albViewModel);
                 db.Albuns.Add(album);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(album);
+            return View(albViewModel);
         }
 
         // GET: Album/Edit/5
@@ -73,7 +74,7 @@ namespace ProjetoDiscoteca.Musicas.Web.Controllers
             {
                 return HttpNotFound();
             }
-            return View(album);
+            return View(Mapper.Map<Album, AlbumViewModel>(album));
         }
 
         // POST: Album/Edit/5
@@ -81,15 +82,16 @@ namespace ProjetoDiscoteca.Musicas.Web.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AlbumID,Ano,Nome,Descricao,Email")] Album album)
+        public ActionResult Edit([Bind(Include = "AlbumID,Ano,Nome,Descricao,Email")] AlbumViewModel albViewModel)
         {
             if (ModelState.IsValid)
             {
+                Album album = Mapper.Map<AlbumViewModel, Album>(albViewModel);
                 db.Entry(album).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(album);
+            return View(albViewModel);
         }
 
         // GET: Album/Delete/5
@@ -104,7 +106,7 @@ namespace ProjetoDiscoteca.Musicas.Web.Controllers
             {
                 return HttpNotFound();
             }
-            return View(album);
+            return View(Mapper.Map<Album, AlbumExibicaoViewModel>(album));
         }
 
         // POST: Album/Delete/5

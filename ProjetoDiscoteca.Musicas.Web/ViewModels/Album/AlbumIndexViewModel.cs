@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ProjetoDiscoteca.Musicas.Web.ViewModels.Album
 {
-    public class AlbumIndexViewModel
+    public class AlbumExibicaoViewModel
     {
         public int AlbumID { get; set; }
 
