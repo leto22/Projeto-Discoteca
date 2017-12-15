@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjetoDiscoteca.Musicas.Web.Annotation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace ProjetoDiscoteca.Musicas.Web.ViewModels.Album
 
         [Display(Name = "Email de Contato")]
         [DataType(DataType.EmailAddress)]
+        [Email(ErrorMessage = "E-mail Inválido, Sufixo de término precisar ser - @hotmail.com")]
         [Required(ErrorMessage = "E-mail Obrigatório!")]
         [MaxLength(80, ErrorMessage = "Quantidade de Caracteres Excedidas (Máximo de 80!)")]
         public string Email { get; set; }
