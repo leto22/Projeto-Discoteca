@@ -12,6 +12,7 @@ namespace ProjetoDiscoteca.Musicas.Web.AutoMapper
     {
         protected override void Configure()
         {
+            //Mapeamento por AutoMapper - DesignPattern(ViewModel), Domínio para Views
             Mapper.CreateMap<Album, AlbumExibicaoViewModel>();
             Mapper.CreateMap<Album, AlbumViewModel>();
         }

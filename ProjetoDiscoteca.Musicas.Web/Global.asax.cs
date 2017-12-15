@@ -17,6 +17,8 @@ namespace ProjetoDiscoteca.Musicas.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            //Configuração Para Inicializar o Mapeamento no momento de execução da aplicação
             AutoMapperConfig.Configurar();
         }
     }

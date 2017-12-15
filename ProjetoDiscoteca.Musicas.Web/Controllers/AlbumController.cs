@@ -20,6 +20,7 @@ namespace ProjetoDiscoteca.Musicas.Web.Controllers
         // GET: Album
         public ActionResult Index()
         {
+            //Realização de um Mapa do Domínio-Álbum, para uma ViewModel- Álbum Exibição
             return View(Mapper.Map<List<Album>, List<AlbumExibicaoViewModel>>(db.Albuns.ToList()));
         }
 
@@ -35,6 +36,8 @@ namespace ProjetoDiscoteca.Musicas.Web.Controllers
             {
                 return HttpNotFound();
             }
+
+            //Mapa para realizar a converção do Domínio-Álbum para ViewModel-Álbum Exibição
             return View(Mapper.Map<Album, AlbumExibicaoViewModel>(album));
         }
 
@@ -53,6 +56,7 @@ namespace ProjetoDiscoteca.Musicas.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                //Mapa para realizar a converção do ViewModel-Álbum Exibição para Domínio-Álbum 
                 Album album = Mapper.Map<AlbumViewModel, Album>(albViewModel);
                 db.Albuns.Add(album);
                 db.SaveChanges();
@@ -74,6 +78,8 @@ namespace ProjetoDiscoteca.Musicas.Web.Controllers
             {
                 return HttpNotFound();
             }
+
+            //Mapa para realizar a converção do Domínio-Álbum para ViewModel-Álbum Exibição
             return View(Mapper.Map<Album, AlbumViewModel>(album));
         }
 
@@ -86,6 +92,7 @@ namespace ProjetoDiscoteca.Musicas.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                //Mapa para realizar a converção do ViewModel-Álbum Exibição para Domínio-Álbum 
                 Album album = Mapper.Map<AlbumViewModel, Album>(albViewModel);
                 db.Entry(album).State = EntityState.Modified;
                 db.SaveChanges();
@@ -106,6 +113,8 @@ namespace ProjetoDiscoteca.Musicas.Web.Controllers
             {
                 return HttpNotFound();
             }
+
+            //Mapa para realizar a converção do Domínio-Álbum para ViewModel-Álbum Exibição
             return View(Mapper.Map<Album, AlbumExibicaoViewModel>(album));
         }
 

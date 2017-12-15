@@ -11,6 +11,7 @@ namespace ProjetoDiscoteca.Musicas.Web.App_Start
     {
         public static void Configurar()
         {
+            //Criação de um Perfil de Mapeamento para Domínio e View
             Mapper.AddProfile<DominioParaViewModelProfile>();
             Mapper.AddProfile<ViewModelParaDominioProfile>();
         }
