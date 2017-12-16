@@ -13,5 +13,9 @@ namespace ProjetoDiscoteca.Musicas.Dominio
 
         public virtual Album Album { get; set; }
         public int IdAlbum { get; set; }
+
+        public class MusicaViewModel
+        {
+        }
     }
 }

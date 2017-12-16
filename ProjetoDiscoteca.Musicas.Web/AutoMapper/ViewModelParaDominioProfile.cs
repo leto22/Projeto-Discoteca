@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using static ProjetoDiscoteca.Musicas.Dominio.Musica;
 
 namespace ProjetoDiscoteca.Musicas.Web.AutoMapper
 {
@@ -14,6 +15,7 @@ namespace ProjetoDiscoteca.Musicas.Web.AutoMapper
         {
             //Mapeamento por AutoMapper - DesignPattern(ViewModel), Views para Domínio
             Mapper.CreateMap<AlbumViewModel, Album>();
+            Mapper.CreateMap<MusicaViewModel, Musica>();
         }
     }
 }

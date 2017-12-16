@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ProjetoDiscoteca.Musicas.Dominio;
 using ProjetoDiscoteca.Musicas.Web.ViewModels.Album;
+using ProjetoDiscoteca.Musicas.Web.ViewModels.Musica;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,8 +24,14 @@ namespace ProjetoDiscoteca.Musicas.Web.AutoMapper
                     //{0} - parametro = nome, "({1})" - parametro = ano, de maneira que à junção de ambos saia "Nome(Ano)"
                     opt.MapFrom(src => string.Format("{0} ({1})", src.Nome, src.Ano.ToString()));
                 });
-
             Mapper.CreateMap<Album, AlbumViewModel>();
+
+            Mapper.CreateMap<Musica, MusicaExibicaoViewModel>()
+                .ForMember(p => p.NomeAlbum, opt =>
+                {
+                    opt.MapFrom(src => src.Album.Nome);
+                });
+            Mapper.CreateMap<Musica, MusicaViewModel>();
         }
     }
 }
