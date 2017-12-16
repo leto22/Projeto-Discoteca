@@ -18,12 +18,12 @@ namespace ProjetoDiscoteca.Musicas.Web.ViewModels.Album
 
         [Display(Name = "Nome do Álbum")]
         [Required(ErrorMessage = "Nome Obrigatório!")]
-        [MaxLength(100, ErrorMessage = "Máximo de 100 Caracteres!")]
+        [MaxLength(100, ErrorMessage = "Quantidade de Caracteres Excedidas (Máximo de 100!)")]
         public string Nome { get; set; }
 
         [Display(Name = "Descrições")]
         [Required(ErrorMessage = "Descrição Obrigatória!")]
-        [MaxLength(100, ErrorMessage = "Quantidade de Caracteres Excedidas (Máximo de 1000!)")]
+        [MaxLength(1000, ErrorMessage = "Quantidade de Caracteres Excedidas (Máximo de 1000!)")]
         public string Descricao { get; set; }
 
         [Display(Name = "Email de Contato")]
