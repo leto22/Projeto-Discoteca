@@ -8,9 +8,12 @@ using System.Threading.Tasks;
 
 namespace ProjetoDiscoteca.Repositorios.Comum.Entity
 {
-    public class RepositorioGenericoEntity<TEntidade, TChave> : IRepositorioGenerico<TEntidade, TChave>
+    public class RepositorioGenericoEntity<TEntidade, TChave> : IRepositorioGenerico<TEntidade, TChave> 
         where TEntidade : class
     {
+        /* CLASSE UTILIZADA PARA A IMPLEMENTAÇÃO DOS DADOS COM ENTITY, ONDE ESTÁ CHAMANDO A CLASSE INTERFACE E IMPLEMENTADONDO
+        SEUS METODOS */
+
         private DbContext _contexto;
 
         public RepositorioGenericoEntity(DbContext contexto)

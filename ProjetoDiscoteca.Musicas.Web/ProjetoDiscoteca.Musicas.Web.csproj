@@ -248,6 +248,18 @@
       <Project>{bf0150e2-d83a-41ff-b1d8-677510a384f1}</Project>
       <Name>ProjetoDiscoteca.Musicas.Dominio</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ProjetoDiscoteca.Musicas.Repositorios.Entity\ProjetoDiscoteca.Musicas.Repositorios.Entity.csproj">
+      <Project>{78279097-7d71-49e1-9c41-50cfd8ec6b94}</Project>
+      <Name>ProjetoDiscoteca.Musicas.Repositorios.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProjetoDiscoteca.Repositorio.Comum\ProjetoDiscoteca.Repositorio.Comum.csproj">
+      <Project>{b48825da-d669-4400-9474-66ee0428430a}</Project>
+      <Name>ProjetoDiscoteca.Repositorio.Comum</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProjetoDiscoteca.Repositorios.Comum.Entity\ProjetoDiscoteca.Repositorios.Comum.Entity.csproj">
+      <Project>{2e77c155-7566-4593-842f-c1a0e0c2ddd0}</Project>
+      <Name>ProjetoDiscoteca.Repositorios.Comum.Entity</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -10,18 +10,20 @@ using AutoMapper;
 using ProjetoDiscoteca.Musicas.AcessoDados.Entity.Context;
 using ProjetoDiscoteca.Musicas.Dominio;
 using ProjetoDiscoteca.Musicas.Web.ViewModels.Album;
+using ProjetoDiscoteca.Repositorio.Comum;
+using ProjetoDiscoteca.Musicas.Repositorios.Entity;
 
 namespace ProjetoDiscoteca.Musicas.Web.Controllers
 {
     public class AlbumController : Controller
     {
-        private MusicasDbContext db = new MusicasDbContext();
+        private IRepositorioGenerico<Album, int> repositorioAlbuns = new AlbumRepositorio(new MusicasDbContext());
 
         // GET: Album
         public ActionResult Index()
         {
             //Realização de um Mapa do Domínio-Álbum, para uma ViewModel- Álbum Exibição
-            return View(Mapper.Map<List<Album>, List<AlbumExibicaoViewModel>>(db.Albuns.ToList()));
+            return View(Mapper.Map<List<Album>, List<AlbumExibicaoViewModel>>(repositorioAlbuns.Selecionar()));
         }
 
         // GET: Album/Details/5
@@ -31,7 +33,7 @@ namespace ProjetoDiscoteca.Musicas.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = db.Albuns.Find(id);
+            Album album = repositorioAlbuns.SelecionarPorID(id.Value);
             if (album == null)
             {
                 return HttpNotFound();
@@ -58,8 +60,7 @@ namespace ProjetoDiscoteca.Musicas.Web.Controllers
             {
                 //Mapa para realizar a converção do ViewModel-Álbum Exibição para Domínio-Álbum 
                 Album album = Mapper.Map<AlbumViewModel, Album>(albViewModel);
-                db.Albuns.Add(album);
-                db.SaveChanges();
+                repositorioAlbuns.InserirDados(album);
                 return RedirectToAction("Index");
             }
 
@@ -73,7 +74,7 @@ namespace ProjetoDiscoteca.Musicas.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = db.Albuns.Find(id);
+            Album album = repositorioAlbuns.SelecionarPorID(id.Value);
             if (album == null)
             {
                 return HttpNotFound();
@@ -94,8 +95,7 @@ namespace ProjetoDiscoteca.Musicas.Web.Controllers
             {
                 //Mapa para realizar a converção do ViewModel-Álbum Exibição para Domínio-Álbum 
                 Album album = Mapper.Map<AlbumViewModel, Album>(albViewModel);
-                db.Entry(album).State = EntityState.Modified;
-                db.SaveChanges();
+                repositorioAlbuns.AlterarDados(album);
                 return RedirectToAction("Index");
             }
             return View(albViewModel);
@@ -108,7 +108,7 @@ namespace ProjetoDiscoteca.Musicas.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = db.Albuns.Find(id);
+            Album album = repositorioAlbuns.SelecionarPorID(id.Value);
             if (album == null)
             {
                 return HttpNotFound();
@@ -123,19 +123,8 @@ namespace ProjetoDiscoteca.Musicas.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Album album = db.Albuns.Find(id);
-            db.Albuns.Remove(album);
-            db.SaveChanges();
+            repositorioAlbuns.ExcluirDadosPorId(id);
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

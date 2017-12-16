@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoDiscoteca.Repositori
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoDiscoteca.Repositorios.Comum.Entity", "ProjetoDiscoteca.Repositorios.Comum.Entity\ProjetoDiscoteca.Repositorios.Comum.Entity.csproj", "{2E77C155-7566-4593-842F-C1A0E0C2DDD0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoDiscoteca.Musicas.Repositorios.Entity", "ProjetoDiscoteca.Musicas.Repositorios.Entity\ProjetoDiscoteca.Musicas.Repositorios.Entity.csproj", "{78279097-7D71-49E1-9C41-50CFD8EC6B94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{2E77C155-7566-4593-842F-C1A0E0C2DDD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E77C155-7566-4593-842F-C1A0E0C2DDD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E77C155-7566-4593-842F-C1A0E0C2DDD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78279097-7D71-49E1-9C41-50CFD8EC6B94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78279097-7D71-49E1-9C41-50CFD8EC6B94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78279097-7D71-49E1-9C41-50CFD8EC6B94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78279097-7D71-49E1-9C41-50CFD8EC6B94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,6 +67,7 @@ Global
 		{4F35352D-1647-4114-886C-BE8A6981DEDD} = {C0E3665A-002D-42D7-BC18-512EEC90A4F5}
 		{B48825DA-D669-4400-9474-66EE0428430A} = {99545915-6652-4ED5-9DFB-25A5004EF7F1}
 		{2E77C155-7566-4593-842F-C1A0E0C2DDD0} = {99545915-6652-4ED5-9DFB-25A5004EF7F1}
+		{78279097-7D71-49E1-9C41-50CFD8EC6B94} = {99545915-6652-4ED5-9DFB-25A5004EF7F1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A8D7BD97-3192-4029-A810-A8DAF4796D1F}
