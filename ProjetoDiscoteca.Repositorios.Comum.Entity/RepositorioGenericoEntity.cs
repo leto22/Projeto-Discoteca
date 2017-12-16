@@ -14,19 +14,19 @@ namespace ProjetoDiscoteca.Repositorios.Comum.Entity
         /* CLASSE UTILIZADA PARA A IMPLEMENTAÇÃO DOS DADOS COM ENTITY, ONDE ESTÁ CHAMANDO A CLASSE INTERFACE E IMPLEMENTADONDO
         SEUS METODOS */
 
-        private DbContext _contexto;
+        protected DbContext _contexto;
 
         public RepositorioGenericoEntity(DbContext contexto)
         {
             _contexto = contexto;
         }
 
-        public List<TEntidade> Selecionar()
+        public virtual List<TEntidade> Selecionar()
         {
             return _contexto.Set<TEntidade>().ToList();
         }
 
-        public TEntidade SelecionarPorID(TChave id)
+        public virtual TEntidade SelecionarPorID(TChave id)
         {
             return _contexto.Set<TEntidade>().Find(id);
         }

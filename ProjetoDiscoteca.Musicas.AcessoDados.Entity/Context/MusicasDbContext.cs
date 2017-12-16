@@ -14,10 +14,12 @@ namespace ProjetoDiscoteca.Musicas.AcessoDados.Entity.Context
     {
         public MusicasDbContext()
         {
-            //Configuration.LazyLoadingEnabled = false;
+            Configuration.LazyLoadingEnabled = false;
+            Configuration.ProxyCreationEnabled = false;
         }
 
         public DbSet<Album> Albuns { get; set; }
+        public DbSet<Musica> Musicas { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
