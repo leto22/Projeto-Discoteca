@@ -8,43 +8,37 @@ using System.Threading.Tasks;
 
 namespace ProjetoDiscoteca.Musicas.AcessoDados.Entity.TypeConfiguration
 {
-    class AlbumTypeConfiguration : ProjetoDiscotecaEntityAbstractConfig<Album>
+    class MusicaTypeConfiguration : ProjetoDiscotecaEntityAbstractConfig<Musica>
     {
         protected override void ConfiguraCamposTabela()
         {
-            Property(p => p.AlbumID).IsRequired()
+            Property(p => p.MusicaID).IsRequired()
                 .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)
-                .HasColumnName("ALB_ID");
+                .HasColumnName("MUS_ID");
 
             Property(p => p.Nome).IsRequired()
-                .HasColumnName("ALB_NOME")
-                .HasMaxLength(100);
+                .HasColumnName("MUS_NOME")
+                .HasMaxLength(50);
 
-            Property(p => p.Ano).IsRequired()
-                .HasColumnName("ALB_ANO");
-
-            Property(p => p.Descricao).IsOptional()
-                .HasColumnName("ALB_OBSERVACOES")
-                .HasMaxLength(1000);
-
-            Property(p => p.Email).IsRequired()
-                .HasColumnName("ALB_EMAIL")
-                .HasMaxLength(80);
+            Property(p => p.IdAlbum).IsRequired()
+                .HasColumnName("ALB_ID");
         }
 
         protected override void ConfiguraChavePrimaria()
         {
-            HasKey(pk => pk.AlbumID);
+            HasKey(pk => pk.MusicaID);
         }
 
         protected override void ConfiguraChavesEstrangeiras()
         {
-            
+            HasRequired(p => p.Album)
+                .WithMany(p => p.Musicas)
+                .HasForeignKey(fk => fk.IdAlbum);
         }
 
         protected override void ConfiguraNomeTabela()
         {
-            ToTable("ALB_ALBUNS");
+            ToTable("MUS_MUSICAS");
         }
     }
 }

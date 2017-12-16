@@ -13,5 +13,7 @@ namespace ProjetoDiscoteca.Musicas.Dominio
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public string Email { get; set; }
+
+        public virtual List<Musica> Musicas { get; set; }
     }
 }
