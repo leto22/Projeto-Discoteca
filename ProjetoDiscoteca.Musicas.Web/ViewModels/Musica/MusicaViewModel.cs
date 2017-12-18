@@ -9,7 +9,7 @@ namespace ProjetoDiscoteca.Musicas.Web.ViewModels.Musica
     public class MusicaViewModel
     {
         [Required(ErrorMessage = "ID Obrigatório!")]
-        public int MusicaID { get; set; }
+        public long MusicaID { get; set; }
 
         [Required(ErrorMessage = "Nome da Obrigatória")]
         [Display(Name = "Nome da Música")]
@@ -17,6 +17,7 @@ namespace ProjetoDiscoteca.Musicas.Web.ViewModels.Musica
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "Selecione um Álbum Válido")]
+        [Display(Name = "Álbum")]
         public int IdAlbum { get; set; }
     }
 }

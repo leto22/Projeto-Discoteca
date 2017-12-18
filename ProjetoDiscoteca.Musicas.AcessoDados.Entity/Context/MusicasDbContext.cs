@@ -14,8 +14,8 @@ namespace ProjetoDiscoteca.Musicas.AcessoDados.Entity.Context
     {
         public MusicasDbContext()
         {
-            Configuration.LazyLoadingEnabled = false;
-            Configuration.ProxyCreationEnabled = false;
+            //Configuration.LazyLoadingEnabled = false;
+            //Configuration.ProxyCreationEnabled = false;
         }
 
         public DbSet<Album> Albuns { get; set; }

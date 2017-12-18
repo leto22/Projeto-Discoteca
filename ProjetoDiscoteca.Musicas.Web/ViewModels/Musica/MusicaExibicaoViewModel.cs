@@ -8,7 +8,7 @@ namespace ProjetoDiscoteca.Musicas.Web.ViewModels.Musica
 {
     public class MusicaExibicaoViewModel
     {
-        public int MusicaID { get; set; }
+        public long MusicaID { get; set; }
 
         [Display(Name = "Nome da Música")]
         public string Nome { get; set; }

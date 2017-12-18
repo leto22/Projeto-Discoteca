@@ -8,18 +8,24 @@ using System.Web;
 using System.Web.Mvc;
 using ProjetoDiscoteca.Musicas.AcessoDados.Entity.Context;
 using ProjetoDiscoteca.Musicas.Dominio;
+using ProjetoDiscoteca.Repositorio.Comum;
+using ProjetoDiscoteca.Musicas.Repositorios.Entity;
+using AutoMapper;
+using ProjetoDiscoteca.Musicas.Web.ViewModels.Musica;
+using ProjetoDiscoteca.Musicas.Web.ViewModels.Album;
 
 namespace ProjetoDiscoteca.Musicas.Web.Controllers
 {
     public class MusicaController : Controller
     {
-        private MusicasDbContext db = new MusicasDbContext();
+        private IRepositorioGenerico<Musica, long> repositorioMusicas = new MusicaRepositorio(new MusicasDbContext());
+        private IRepositorioGenerico<Album, int> repositorioAlbuns = new AlbumRepositorio(new MusicasDbContext());
 
         // GET: Musica
         public ActionResult Index()
         {
-            var musicas = db.Musicas.Include(m => m.Album);
-            return View(musicas.ToList());
+            //var musicas = db.Musicas.Include(m => m.Album);
+            return View(Mapper.Map<List<Musica>, List<MusicaExibicaoViewModel>>(repositorioMusicas.Selecionar()));
         }
 
         // GET: Musica/Details/5
@@ -29,18 +35,20 @@ namespace ProjetoDiscoteca.Musicas.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Musica musica = db.Musicas.Find(id);
+            Musica musica = repositorioMusicas.SelecionarPorID(id.Value);
             if (musica == null)
             {
                 return HttpNotFound();
             }
-            return View(musica);
+            return View(Mapper.Map<Musica, MusicaExibicaoViewModel>(musica));
         }
 
         // GET: Musica/Create
         public ActionResult Create()
         {
-            ViewBag.IdAlbum = new SelectList(db.Albuns, "AlbumID", "Nome");
+            List<AlbumExibicaoViewModel> albuns = Mapper.Map<List<Album>, List<AlbumExibicaoViewModel>>(repositorioAlbuns.Selecionar());
+            SelectList dropDownAlbuns = new SelectList(albuns, "AlbumID", "Nome");
+            ViewBag.DropDownAlbuns = dropDownAlbuns;
             return View();
         }
 
@@ -49,33 +57,36 @@ namespace ProjetoDiscoteca.Musicas.Web.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MusicaID,Nome,IdAlbum")] Musica musica)
+        public ActionResult Create([Bind(Include = "MusicaID,Nome,IdAlbum")] MusicaViewModel mscViewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Musicas.Add(musica);
-                db.SaveChanges();
+                Musica musica = Mapper.Map<MusicaViewModel, Musica>(mscViewModel);
+                repositorioMusicas.InserirDados(musica);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IdAlbum = new SelectList(db.Albuns, "AlbumID", "Nome", musica.IdAlbum);
-            return View(musica);
+            //ViewBag.IdAlbum = new SelectList(db.Albuns, "AlbumID", "Nome", musica.IdAlbum);
+            return View(mscViewModel);
         }
 
         // GET: Musica/Edit/5
-        public ActionResult Edit(long? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Musica musica = db.Musicas.Find(id);
+            Musica musica = repositorioMusicas.SelecionarPorID(id.Value);
             if (musica == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.IdAlbum = new SelectList(db.Albuns, "AlbumID", "Nome", musica.IdAlbum);
-            return View(musica);
+
+            List<AlbumExibicaoViewModel> albuns = Mapper.Map<List<Album>, List<AlbumExibicaoViewModel>>(repositorioAlbuns.Selecionar());
+            SelectList dropDownAlbuns = new SelectList(albuns, "AlbumID", "Nome");
+            ViewBag.DropDownAlbuns = dropDownAlbuns;
+            return View(Mapper.Map<Musica, MusicaViewModel>(musica));
         }
 
         // POST: Musica/Edit/5
@@ -83,51 +94,39 @@ namespace ProjetoDiscoteca.Musicas.Web.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MusicaID,Nome,IdAlbum")] Musica musica)
+        public ActionResult Edit([Bind(Include = "MusicaID,Nome,IdAlbum")] MusicaViewModel musicaViewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(musica).State = EntityState.Modified;
-                db.SaveChanges();
+                Musica musica = Mapper.Map<MusicaViewModel, Musica>(musicaViewModel);
+                repositorioMusicas.AlterarDados(musica);
                 return RedirectToAction("Index");
             }
-            ViewBag.IdAlbum = new SelectList(db.Albuns, "AlbumID", "Nome", musica.IdAlbum);
-            return View(musica);
+            return View(musicaViewModel);
         }
 
         // GET: Musica/Delete/5
-        public ActionResult Delete(long? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Musica musica = db.Musicas.Find(id);
+            Musica musica = repositorioMusicas.SelecionarPorID(id.Value);
             if (musica == null)
             {
                 return HttpNotFound();
             }
-            return View(musica);
+            return View(Mapper.Map<Musica, MusicaExibicaoViewModel>(musica));
         }
 
         // POST: Musica/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            Musica musica = db.Musicas.Find(id);
-            db.Musicas.Remove(musica);
-            db.SaveChanges();
+            repositorioMusicas.ExcluirDadosPorId(id);
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

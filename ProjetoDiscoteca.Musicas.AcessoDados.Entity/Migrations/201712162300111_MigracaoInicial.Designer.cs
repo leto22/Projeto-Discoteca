@@ -13,7 +13,7 @@ namespace ProjetoDiscoteca.Musicas.AcessoDados.Entity.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201712111859271_MigracaoInicial"; }
+            get { return "201712162300111_MigracaoInicial"; }
         }
         
         string IMigrationMetadata.Source
