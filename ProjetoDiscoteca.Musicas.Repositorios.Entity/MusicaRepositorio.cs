@@ -22,7 +22,7 @@ namespace ProjetoDiscoteca.Musicas.Repositorios.Entity
 
         public override Musica SelecionarPorID(long id)
         {
-            return _contexto.Set<Musica>().Include(p => p.Album).SingleOrDefault(m => m.IdAlbum == id);
+            return _contexto.Set<Musica>().Include(p => p.Album).SingleOrDefault(m => m.MusicaID == id);
         }
     }
 }
