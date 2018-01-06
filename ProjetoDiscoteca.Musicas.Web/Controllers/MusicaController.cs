@@ -16,6 +16,7 @@ using ProjetoDiscoteca.Musicas.Web.ViewModels.Album;
 
 namespace ProjetoDiscoteca.Musicas.Web.Controllers
 {
+    [Authorize]
     public class MusicaController : Controller
     {
         private IRepositorioGenerico<Musica, long> repositorioMusicas = new MusicaRepositorio(new MusicasDbContext());

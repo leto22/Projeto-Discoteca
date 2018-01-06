@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using ProjetoDiscoteca.Musicas.Web.Filtro;
+using System.Web;
 using System.Web.Mvc;
 
 namespace ProjetoDiscoteca.Musicas.Web
@@ -8,6 +9,8 @@ namespace ProjetoDiscoteca.Musicas.Web
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            filters.Add(new LogActionFilter());
+            filters.Add(new LogResultFilter());
         }
     }
 }

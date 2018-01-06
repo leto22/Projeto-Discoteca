@@ -14,6 +14,12 @@ namespace ProjetoDiscoteca.Musicas.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "PesquisarAlbuns",
+                url: "Album/PesquisarPorNome/{pesquisa}",
+                defaults: new { controller = "Album", action = "FiltroNome", pesquisa = UrlParameter.Optional }
+                );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

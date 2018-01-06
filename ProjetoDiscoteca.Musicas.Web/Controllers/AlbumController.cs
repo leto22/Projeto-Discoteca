@@ -15,6 +15,7 @@ using ProjetoDiscoteca.Musicas.Repositorios.Entity;
 
 namespace ProjetoDiscoteca.Musicas.Web.Controllers
 {
+    [Authorize]
     public class AlbumController : Controller
     {
         private IRepositorioGenerico<Album, int> repositorioAlbuns = new AlbumRepositorio(new MusicasDbContext());
@@ -24,6 +25,13 @@ namespace ProjetoDiscoteca.Musicas.Web.Controllers
         {
             //Realização de um Mapa do Domínio-Álbum, para uma ViewModel- Álbum Exibição
             return View(Mapper.Map<List<Album>, List<AlbumExibicaoViewModel>>(repositorioAlbuns.Selecionar()));
+        }
+
+        public ActionResult FiltroNome(string pesquisa)
+        {
+            List<Album> albuns = repositorioAlbuns.Selecionar().Where(a => a.Nome.Contains(pesquisa)).ToList();
+            List<AlbumExibicaoViewModel> albViewModel = Mapper.Map<List<Album>, List<AlbumExibicaoViewModel>>(albuns);
+            return Json(albViewModel, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Album/Details/5
